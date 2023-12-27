@@ -25,7 +25,7 @@ public class UserController {
     ResponseEntity<User> getSingleUser(@PathVariable String userId)
     {
         User user = userService.getUser(userId);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
     @GetMapping("/")
     ResponseEntity<List<User>> getAllUser()
