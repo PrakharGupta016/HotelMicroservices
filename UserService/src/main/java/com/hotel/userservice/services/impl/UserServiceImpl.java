@@ -1,14 +1,15 @@
-package services.impl;
+package com.hotel.userservice.services.impl;
 
-import entities.User;
-import exceptions.ResourceNotFoundException;
+import com.hotel.userservice.entities.User;
+import com.hotel.userservice.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.UserRepository;
-import services.UserService;
+import com.hotel.userservice.repositories.UserRepository;
+import com.hotel.userservice.services.UserService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,6 +17,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Override
     public User saveUser(User user) {
+        String id = UUID.randomUUID().toString();
+        user.setUserId(id);
         userRepository.save(user);
         return user;
     }

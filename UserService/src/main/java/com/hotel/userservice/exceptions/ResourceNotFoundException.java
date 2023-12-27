@@ -1,4 +1,4 @@
-package exceptions;
+package com.hotel.userservice.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
      public ResourceNotFoundException()

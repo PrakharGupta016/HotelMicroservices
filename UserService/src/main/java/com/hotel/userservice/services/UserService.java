@@ -1,6 +1,6 @@
-package services;
+package com.hotel.userservice.services;
 
-import entities.User;
+import com.hotel.userservice.entities.User;
 
 import java.util.List;
 
