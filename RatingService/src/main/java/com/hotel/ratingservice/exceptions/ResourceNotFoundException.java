@@ -1,6 +1,4 @@
-package exceptions;
-
-import java.util.function.Supplier;
+package com.hotel.ratingservice.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException  {
      public ResourceNotFoundException()

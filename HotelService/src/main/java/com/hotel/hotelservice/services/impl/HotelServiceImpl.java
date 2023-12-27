@@ -3,7 +3,7 @@ package com.hotel.hotelservice.services.impl;
 import com.hotel.hotelservice.entities.Hotel;
 import com.hotel.hotelservice.repositories.HotelRepository;
 import com.hotel.hotelservice.services.HotelService;
-import exceptions.ResourceNotFoundException;
+import com.hotel.hotelservice.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

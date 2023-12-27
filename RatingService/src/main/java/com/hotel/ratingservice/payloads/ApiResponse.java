@@ -1,4 +1,4 @@
-package payloads;
+package com.hotel.ratingservice.payloads;
 
 import lombok.Builder;
 import lombok.Data;
