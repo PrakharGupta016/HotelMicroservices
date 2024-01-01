@@ -4,6 +4,7 @@ import com.hotel.userservice.entities.Hotel;
 import com.hotel.userservice.entities.Ratings;
 import com.hotel.userservice.entities.User;
 import com.hotel.userservice.exceptions.ResourceNotFoundException;
+import com.hotel.userservice.external.services.HotelService;
 import com.netflix.servo.util.ClockWithOffset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RestTemplate restTemplate;
-
+    @Autowired
+    private HotelService hotelService;
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Override
     public User saveUser(User user) {
@@ -41,12 +43,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(String userId) {
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("user with " + userId + "not found"));
-        Ratings[] objRatings = restTemplate.getForObject("http://localhost:8082/ratings/user/"+user.getUserId(), Ratings[].class);
+        Ratings[] objRatings = restTemplate.getForObject("http://RATING-SERVICE/ratings/user/"+user.getUserId(), Ratings[].class);
         logger.info("{}",objRatings);
 //        user.setRatings(obj);
         List<Ratings> obj = Arrays.stream(objRatings).toList();
        List<Ratings> ratings =  obj.stream().map(rating->{
-           Hotel hotel = restTemplate.getForObject("http://localhost:8081/hotels/"+rating.getHotelId(), Hotel.class);
+//           Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+           Hotel hotel = hotelService.getHotel(rating.getHotelId());
            rating.setHotel(hotel);
            return rating;
        }).collect(Collectors.toList());
